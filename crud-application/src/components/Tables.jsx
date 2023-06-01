@@ -1,5 +1,5 @@
 import React from 'react'
-import { getPeople, addPerson } from "../services/peopleAPI";
+import { getPeople, addPerson, deletePerson } from "../services/peopleAPI";
 import { useEffect, useState } from 'react'
 
 
@@ -19,8 +19,15 @@ const Tables = () => {
         });
       }
       
-   
     const [people, setPeople] = useState([]);
+    const handleDelete = async (id) =>{
+      try {
+        await deletePerson(id);
+        setPeople(prevPeople => prevPeople.filter(person => person.id !== id));
+      }catch (error) {
+        console.error(error);
+      }
+    }
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -29,6 +36,7 @@ const Tables = () => {
       setPeople(result);
     }
 
+    
     fetchPeople();
     console.log(people);
   }, []);
@@ -52,6 +60,7 @@ const Tables = () => {
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Mail</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -62,6 +71,7 @@ const Tables = () => {
                     <td>{person.name}</td>
                     <td>{person.surname}</td>
                     <td>{person.mail}</td>
+                    <td><button onClick={() => handleDelete(person.id)}>Delete</button></td>
                 </tr>
             )
             )
@@ -81,7 +91,7 @@ const Tables = () => {
         <input type="text" name="mail" value={formData.mail} onChange={handleInputChange} required />
         <button type="submit">Add</button>
       </form>
-</div>
+    </div>
   )
 }
 

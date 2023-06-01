@@ -18,3 +18,12 @@ import axios from 'axios';
       console.error(error);
     }
   }
+  export async function deletePerson(id) {
+    try {
+      const response = await axios.delete(`http://localhost:3000/people/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
