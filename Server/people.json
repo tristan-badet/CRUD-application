@@ -1,0 +1,34 @@
+{
+  "people": [
+    {
+      "id": "1",
+      "name": "Tristan",
+      "surname": "Badet",
+      "mail": "tristan.badet@laplateforme.io"
+    },
+    {
+      "id": "2",
+      "name": "Fabien",
+      "surname": "Ghuillon",
+      "mail": "fabien.ghuillon@laplateforme.io"
+    },
+    {
+      "id": "3",
+      "name": "Salvatore",
+      "surname": "Omnioe",
+      "mail": "Salvatore13@gmail.com"
+    },
+    {
+      "id": "4",
+      "name": "Kodopi",
+      "surname": "Kodopo",
+      "mail": "Kodopi-kodopo@gmail.com"
+    },
+    {
+      "id": "5",
+      "name": "José",
+      "surname": "Garcia",
+      "mail": "José-Garcia@gmail.com"
+    }
+  ]
+}
