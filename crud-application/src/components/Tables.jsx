@@ -1,5 +1,5 @@
 import React from 'react'
-import { getPeople, addPerson, deletePerson } from "../services/peopleAPI";
+import { getPeople, addPerson, deletePerson, editPerson } from "../services/peopleAPI";
 import { useEffect, useState } from 'react'
 
 
@@ -18,6 +18,14 @@ const Tables = () => {
           [event.target.name]: event.target.value
         });
       }
+
+      const handleEdit = (person) => {
+        setFormData({
+        id: person.id,
+        name: person.name,
+        surname: person.surname,
+        mail: person.mail
+      })}
       
     const [people, setPeople] = useState([]);
     const handleDelete = async (id) =>{
@@ -35,22 +43,35 @@ const Tables = () => {
       console.log(result);
       setPeople(result);
     }
-
-    
     fetchPeople();
     console.log(people);
   }, []);
+
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-  
-    try {
-      const newPerson = await addPerson(formData);
-      setPeople(prevPeople => [...prevPeople, newPerson]);
-      setFormData({ id: '', name: '', surname: '', mail: '' });
-    } catch (error) {
-      console.error(error);
+
+    if (formData.id) {
+      try {
+        const updatedPerson = await editPerson(formData.id, formData);
+        setPeople(prevPeople =>
+          prevPeople.map(person => (person.id === formData.id ? updatedPerson : person))
+        );
+        setFormData({ id: '', name: '', surname: '', mail: '' });
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        const newPerson = await addPerson(formData);
+        setPeople(prevPeople => [...prevPeople, newPerson]);
+        setFormData({ id: '', name: '', surname: '', mail: '' });
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }
+  };
+
   return (
     <div>
     <table>
@@ -71,7 +92,8 @@ const Tables = () => {
                     <td>{person.name}</td>
                     <td>{person.surname}</td>
                     <td>{person.mail}</td>
-                    <td><button onClick={() => handleDelete(person.id)}>Delete</button></td>
+                    <td><button onClick={() => handleDelete(person.id)}>Delete</button>
+                    <button onClick={() => handleEdit(person)}>Edit</button></td>
                 </tr>
             )
             )
