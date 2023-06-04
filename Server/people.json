@@ -7,10 +7,16 @@
       "mail": "tristan.badet@laplateforme.io"
     },
     {
+      "id": "3",
+      "name": "geronimo",
+      "surname": "aladin",
+      "mail": "geroladin@gmail.com"
+    },
+    {
       "id": "2",
-      "name": "Kodopop",
-      "surname": "Kodopojkbkj",
-      "mail": "Kodopi-Kodop@gmail.com"
+      "name": "Kodop",
+      "surname": "Kodopi",
+      "mail": "Kodopi-Kodopo@gmail.com"
     }
   ]
 }
